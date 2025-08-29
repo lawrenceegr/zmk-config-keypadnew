@@ -61,22 +61,19 @@
             , <&gpio0 20 GPIO_ACTIVE_HIGH>
             ;
     };
+    xosc: xosc {
+    compatible = "fixed-clock";
+    #clock-cells = <0>;
+    clock-frequency = <12000000>;
+    status = "okay";
 };
-&cpu0 {
-    clock-frequency = <133000000>;
+
 };
 
 &uart0 {
     status = "okay";
 };
 
-&xosc {
-    clock-frequency = <12000000>;
-    status = "okay";
-};
-&nvic {
-    arm,num-irq-priority-bits = <2>;
-};
 
 &flash0 {
     reg = <0x10000000 DT_SIZE_M(2)>;
