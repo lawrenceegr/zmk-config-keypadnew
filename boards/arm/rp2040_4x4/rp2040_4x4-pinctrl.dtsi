@@ -4,5 +4,22 @@
 // more instructions.
 
 &pinctrl {
-
+    kscan0_default: kscan0_default {
+        group1 {
+            /* Row pins */
+            pinmux = <&pio0 2 0>,   /* Row 0 on GP2 */
+                     <&pio0 3 0>,   /* Row 1 on GP3 */
+                     <&pio0 4 0>,   /* Row 2 on GP4 */
+                     <&pio0 5 0>;   /* Row 3 on GP5 */
+            bias-pull-up;
+        };
+        group2 {
+            /* Column pins */
+            pinmux = <&pio0 6 0>,   /* Col 0 on GP6 */
+                     <&pio0 7 0>,   /* Col 1 on GP7 */
+                     <&pio0 8 0>,   /* Col 2 on GP8 */
+                     <&pio0 9 0>;   /* Col 3 on GP9 */
+            bias-pull-down;
+        };
+    };
 };

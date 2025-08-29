@@ -1,7 +1,8 @@
-// This file was generated from a template. Edit it to match your keyboard.
-// See https://docs.zephyrproject.org/3.5.0/hardware/porting/board_porting.html
-// and https://zmk.dev/docs/development/hardware-integration/new-shield for more
-// instructions.
+/*
+ * Copyright (c) 2025 Custom RP2040 4x4 Keypad
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 /dts-v1/;
 #include <rpi_pico/rp2040.dtsi>
@@ -11,46 +12,27 @@
 #include "rp2040_4x4-layouts.dtsi"
 
 / {
-    model = "rp2040_4x4";
-    compatible = "rp2040_4x4,rp2040";
+    model = "RP2040 4x4 Keypad";
+    compatible = "custom,rp2040-4x4", "raspberrypi,rp2040";
 
     chosen {
+        zephyr,code-partition = &code_partition;
+        zephyr,sram = &sram0;
+        zephyr,flash = &flash0;
+        zephyr,console = &uart0;
+        zephyr,shell-uart = &uart0;
+        zmk,kscan = &kscan0;
+        zmk,matrix_transform = &default_transform;
         zmk,physical-layout = &default_layout;
     };
+
     xtal_clk: xtal-clk {
         compatible = "fixed-clock";
         clock-frequency = <12000000>;
         #clock-cells = <0>;
     };
-    kscan: kscan {
-        // If the hardware does not use a switch matrix, change this to the
-        // appropriate driver and update the properties below to match.
-        // See https://zmk.dev/docs/config/kscan for supported key scan drivers.
-        compatible = "zmk,kscan-gpio-matrix";
-        // Set this to "col2row" or "row2col" to match the hardware. If using
-        // "row2col", change the col-gpios to (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)
-        // and the row-gpios to GPIO_ACTIVE_HIGH.
-        diode-direction = "col2row";
-        wakeup-source;
 
-        // Replace these comments with the GPIO pins in the matrix.
-        // See https://zmk.dev/docs/development/hardware-integration/new-shield#shield-overlays
-        col-gpios
-            = <&gpio0 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&gpio0 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            ;
-
-        row-gpios
-            = <&gpio0 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&gpio0 23 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&gpio0 24 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            ;
-    };
-
-    default_transform: default_transform {
+    default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
         columns = <4>;
         rows = <4>;
@@ -61,4 +43,62 @@
             RC(3,0) RC(3,1) RC(3,2) RC(3,3)
         >;
     };
+
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        label = "KSCAN";
+
+        diode-direction = "col2row";
+
+        /* row and column pin assignments */
+        row-gpios
+            = <&gpio0 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&gpio0 23 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&gpio0 24 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            ;
+        col-gpios
+            = <&gpio0 15 GPIO_ACTIVE_HIGH>
+            , <&gpio0 16 GPIO_ACTIVE_HIGH>
+            , <&gpio0 17 GPIO_ACTIVE_HIGH>
+            , <&gpio0 20 GPIO_ACTIVE_HIGH>
+            ;
+
+        pinctrl-0 = <&kscan0_default>;
+        pinctrl-names = "default";
+    };
+};
+
+&flash0 {
+    reg = <0x10000000 DT_SIZE_M(2)>;
+
+    partitions {
+        compatible = "fixed-partitions";
+        #address-cells = <1>;
+        #size-cells = <1>;
+
+        /* Reserved memory for the second stage bootloader */
+        second_stage_bootloader: partition@0 {
+            label = "second_stage_bootloader";
+            reg = <0x00000000 0x00000100>;
+            read-only;
+        };
+
+        /*
+         * Usable flash. Starts at 0x100, after the bootloader. The partition
+         * size is 2MB minus the 0x100 bytes taken by the bootloader.
+         */
+        code_partition: partition@100 {
+            label = "code-partition";
+            reg = <0x00000100 (DT_SIZE_M(2) - 0x100)>;
+        };
+    };
+};
+
+&gpio0 {
+    status = "okay";
+};
+
+&usbd {
+    status = "okay";
 };
