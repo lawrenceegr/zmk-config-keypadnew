@@ -5,7 +5,8 @@
  */
 
 /dts-v1/;
-#include <rpi_pico/rp2040.dtsi>
+
+#include <boards/arm/rpi_pico/rpi_pico.dts>
 #include <dt-bindings/zmk/matrix_transform.h>
 
 #include "rp2040_4x4-layouts.dtsi"
