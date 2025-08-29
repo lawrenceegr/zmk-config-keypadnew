@@ -5,8 +5,7 @@
  */
 
 /dts-v1/;
-
-#include <boards/arm/rpi_pico/rpi_pico.dts>
+#include <rpi_pico/rp2040.dtsi>
 #include <dt-bindings/zmk/matrix_transform.h>
 
 #include "rp2040_4x4-layouts.dtsi"
@@ -62,6 +61,21 @@
             , <&gpio0 20 GPIO_ACTIVE_HIGH>
             ;
     };
+};
+&cpu0 {
+    clock-frequency = <133000000>;
+};
+
+&uart0 {
+    status = "okay";
+};
+
+&xosc {
+    clock-frequency = <12000000>;
+    status = "okay";
+};
+&nvic {
+    arm,num-irq-priority-bits = <2>;
 };
 
 &flash0 {
