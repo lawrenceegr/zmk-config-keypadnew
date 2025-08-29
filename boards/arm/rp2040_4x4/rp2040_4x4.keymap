@@ -1,3 +1,5 @@
+//rp2040_4x4.keymap
+
 // This file was generated from a template. Edit it to match your keyboard.
 // See https://zmk.dev/docs/development/hardware-integration/new-shield for more instructions.
 
@@ -17,10 +19,10 @@
         // |  7  |  8  |  9  |  C  |
         // |  *  |  0  |  #  |  D  |
             bindings = <
-                &kp N1    &kp N2     &kp N3    &kp A
-                &kp N4    &kp N5     &kp N6    &kp B
-                &kp N7    &kp N8     &kp N9    &kp C
-                &kp STAR  &kp N0     &kp HASH  &kp D
+                &kp N1       &kp N2     &kp N3       &kp A
+                &kp N4       &kp N5     &kp N6       &kp B
+                &kp N7       &kp N8     &kp N9       &kp C
+                &kp ASTRK    &kp N0     &kp POUND    &kp D
             >;
         };
     };
