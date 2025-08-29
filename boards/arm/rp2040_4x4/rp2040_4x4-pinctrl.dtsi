@@ -7,23 +7,17 @@
 // Pin control configuration for RP2040 4x4 keypad
 // See Zephyr pinctrl docs: https://docs.zephyrproject.org/latest/hardware/pinctrl/index.html
 
-// rp2040_4x4-pinctrl.dtsi
-// Pin control configuration for RP2040 4x4 keypad
-
 #include <dt-bindings/pinctrl/rpi-pico-rp2040-pinctrl.h>
 
 &pinctrl {
     kscan0_default: kscan0_default {
         group1 {
             pinmux = <PIO0_P21>, <PIO0_P22>, <PIO0_P23>, <PIO0_P24>;
-            output-enable;
         };
         group2 {
             pinmux = <PIO0_P15>, <PIO0_P16>, <PIO0_P17>, <PIO0_P20>;
-            input-enable;
             bias-pull-down;
         };
     };
 };
-
 
