@@ -8,7 +8,6 @@
 #include <rpi_pico/rp2040.dtsi>
 #include <dt-bindings/zmk/matrix_transform.h>
 
-#include "rp2040_4x4-pinctrl.dtsi"
 #include "rp2040_4x4-layouts.dtsi"
 
 / {
@@ -46,8 +45,6 @@
 
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
-        label = "KSCAN";
-
         diode-direction = "col2row";
 
         /* row and column pin assignments */
@@ -63,9 +60,6 @@
             , <&gpio0 17 GPIO_ACTIVE_HIGH>
             , <&gpio0 20 GPIO_ACTIVE_HIGH>
             ;
-
-        pinctrl-0 = <&kscan0_default>;
-        pinctrl-names = "default";
     };
 };
 
