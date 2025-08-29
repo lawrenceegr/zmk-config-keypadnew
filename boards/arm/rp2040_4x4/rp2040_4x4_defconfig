@@ -3,6 +3,7 @@
 # for more information.
 
 CONFIG_BOARD_RP2040_4X4=y
+CONFIG_SOC_RP2040=y
 
 # Enable GPIO
 CONFIG_GPIO=y
