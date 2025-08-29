@@ -7,27 +7,29 @@
 // Pin control configuration for RP2040 4x4 keypad
 // See Zephyr pinctrl docs: https://docs.zephyrproject.org/latest/hardware/pinctrl/index.html
 
+// rp2040_4x4-pinctrl.dtsi
+// Pin control configuration for RP2040 4x4 keypad
+
 &pinctrl {
     kscan0_default: kscan0_default {
         group1 {
-            // Row pins (GPIO 21–24)
-            pins = <RP2040_PINMUX(21, GPIO_FUNC_SIO),
-                    RP2040_PINMUX(22, GPIO_FUNC_SIO),
-                    RP2040_PINMUX(23, GPIO_FUNC_SIO),
-                    RP2040_PINMUX(24, GPIO_FUNC_SIO)>;
+            // Row pins (GPIO 21-24)
+            pinmux = <RP2040_PINMUX(21, GPIO_FUNC_SIO)>,
+                     <RP2040_PINMUX(22, GPIO_FUNC_SIO)>,
+                     <RP2040_PINMUX(23, GPIO_FUNC_SIO)>,
+                     <RP2040_PINMUX(24, GPIO_FUNC_SIO)>;
             output-enable;
         };
         group2 {
-            // Column pins (GPIO 15–20)
-            pins = <RP2040_PINMUX(15, GPIO_FUNC_SIO),
-                    RP2040_PINMUX(16, GPIO_FUNC_SIO),
-                    RP2040_PINMUX(17, GPIO_FUNC_SIO),
-                    RP2040_PINMUX(20, GPIO_FUNC_SIO)>;
+            // Column pins (GPIO 15-17, 20)
+            pinmux = <RP2040_PINMUX(15, GPIO_FUNC_SIO)>,
+                     <RP2040_PINMUX(16, GPIO_FUNC_SIO)>,
+                     <RP2040_PINMUX(17, GPIO_FUNC_SIO)>,
+                     <RP2040_PINMUX(20, GPIO_FUNC_SIO)>;
             input-enable;
             bias-pull-down;
         };
     };
 };
-
 
 
