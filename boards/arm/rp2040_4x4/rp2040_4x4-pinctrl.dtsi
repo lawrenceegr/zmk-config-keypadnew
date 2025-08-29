@@ -11,23 +11,22 @@
     kscan0_default: kscan0_default {
         group1 {
             // Row pins (GPIO 21–24)
-            pinmux = <RP2040_PINMUX(21, GPIO_FUNC_SIO)>
-                   , <RP2040_PINMUX(22, GPIO_FUNC_SIO)>
-                   , <RP2040_PINMUX(23, GPIO_FUNC_SIO)>
-                   , <RP2040_PINMUX(24, GPIO_FUNC_SIO)>;
-
+            pinmux = <RP2040_PINMUX(21, GPIO_FUNC_SIO)
+                      RP2040_PINMUX(22, GPIO_FUNC_SIO)
+                      RP2040_PINMUX(23, GPIO_FUNC_SIO)
+                      RP2040_PINMUX(24, GPIO_FUNC_SIO)>;
             output-enable;
         };
         group2 {
             // Column pins (GPIO 15–20)
-            pinmux = <RP2040_PINMUX(15, GPIO_FUNC_SIO)>
-                   , <RP2040_PINMUX(16, GPIO_FUNC_SIO)>
-                   , <RP2040_PINMUX(17, GPIO_FUNC_SIO)>
-                   , <RP2040_PINMUX(20, GPIO_FUNC_SIO)>;
-
+            pinmux = <RP2040_PINMUX(15, GPIO_FUNC_SIO)
+                      RP2040_PINMUX(16, GPIO_FUNC_SIO)
+                      RP2040_PINMUX(17, GPIO_FUNC_SIO)
+                      RP2040_PINMUX(20, GPIO_FUNC_SIO)>;
             input-enable;
             bias-pull-down;
         };
     };
 };
+
 
