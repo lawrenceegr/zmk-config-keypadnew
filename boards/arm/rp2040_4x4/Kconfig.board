@@ -1,0 +1,8 @@
+# This file was generated from a template. Edit it to match your keyboard.
+# See https://docs.zephyrproject.org/3.5.0/hardware/porting/board_porting.html#write-kconfig-files
+# for more information.
+
+config BOARD_RP2040_4X4
+    bool "rp2040_4x4"
+    depends on SOC_RP2040
+    select BOARD_HAS_FLASH_LOAD_OFFSET
